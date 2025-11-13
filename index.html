@@ -2,104 +2,88 @@
 <html lang="lv">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Filma — 2025</title>
 
 <style>
-    :root {
-        --real-vh: 100vh;
-    }
-
-    body {
+    /* ГЛОБАЛЬНО FIX ШИРИНЫ */
+    * {
         margin: 0;
-        background: #000;
-        color: white;
-        font-family: 'Segoe UI', Arial, sans-serif;
-        overflow-x: hidden;
+        padding: 0;
+        box-sizing: border-box; /* ← самое главное */
     }
 
-    /* LOGIN — фиксированный слой */
+    html, body {
+        width: 100%;
+        overflow-x: hidden; /* ← запрещаем горизонтальный скролл */
+        background: #000;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        color: white;
+    }
+
+    /* ЛОГИН ЭКРАН */
     #login-screen {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: var(--real-vh); /* честная высота */
+        inset: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 20px;
-        box-sizing: border-box;
         background: #000;
-        z-index: 9999;
-        overflow: hidden; /* важный фикс */
+        z-index: 999;
     }
 
     .login-box {
         width: 100%;
-        max-width: 360px;
-        background: rgba(20, 20, 20, 0.95);
-        padding: 35px;
+        max-width: 350px;   /* ← НЕ 360, чтобы точно влезло */
+        background: #151515;
+        padding: 25px;
         border-radius: 12px;
         border: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 0 20px rgba(255,0,0,0.25);
     }
 
     h2 {
         text-align: center;
-        margin-bottom: 25px;
-        font-size: 28px;
-        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 20px;
         color: #e50914;
     }
 
     input {
-        width: 100%;
+        width: 100%; /* ← фикс ширины */
         padding: 14px;
-        margin: 10px 0;
-        border-radius: 6px;
+        margin-top: 10px;
         border: none;
+        border-radius: 6px;
         background: #333;
         color: white;
         font-size: 16px;
     }
 
     button {
-        width: 100%;
+        width: 100%; /* ← фикс ширины */
         padding: 14px;
+        margin-top: 20px;
         background: #e50914;
         border: none;
         border-radius: 6px;
-        font-size: 18px;
         color: white;
-        cursor: pointer;
+        font-size: 18px;
     }
 
     /* MOVIE PAGE */
     .media-page {
         display: none;
-        padding: 25px;
-        margin-bottom: 80px;
+        padding: 20px;
     }
 
-    .info-box {
-        background: linear-gradient(135deg, #141414, #0d0d0d);
-        padding: 25px;
-        border-radius: 12px;
-        margin-bottom: 25px;
-    }
-
-    video {
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    /* FOOTER */
     .footer {
-        text-align: center;
-        opacity: 0.45;
-        font-size: 13px;
-        padding: 15px;
         display: none;
+        text-align: center;
+        color: #aaa;
+        font-size: 13px;
+        padding: 20px;
     }
 </style>
 </head>
@@ -117,74 +101,33 @@
 </div>
 
 <!-- MOVIE PAGE -->
-<div class="media-page" id="media-screen">
-
-    <div class="info-box">
-        <h3>The Last Time</h3>
-        <p><b>Par filmu:</b> drāma par stāstu, kas maina dzīvi.</p>
-        <p><b>Gads:</b> 2025</p>
-        <p><b>Žanrs:</b> Drāma</p>
-        <p><b>Ilgums:</b> 25 min</p>
-    </div>
-
-    <p id="no-video" style="display:none;">Filma vēl nav pievienota…</p>
-
-    <video id="video-player" controls style="display:none;">
-        <source src="film.mp4" type="video/mp4">
-    </video>
+<div id="media-screen" class="media-page">
+    <h3>The Last Time</h3>
+    <p>Filma...</p>
 </div>
 
-<div class="footer" id="footer">
+<div id="footer" class="footer">
     Filma no Milānas K., Ričarda K., Katrīnas B., Unas B. un Daniela K.
 </div>
 
 <script>
-/* Честная высота экрана */
-function fixHeight() {
-    document.documentElement.style.setProperty(
-        "--real-vh",
-        window.innerHeight + "px"
-    );
-}
-fixHeight();
-window.addEventListener("resize", fixHeight);
-
-/* AUTH */
 const correctLogin = "guest";
 const correctPassword = "film2025";
 
 function auth() {
-    const login = document.getElementById('login').value.trim();
-    const pass = document.getElementById('password').value.trim();
+    const login = document.getElementById("login").value;
+    const pass  = document.getElementById("password").value;
 
     if (login === correctLogin && pass === correctPassword) {
-
         document.getElementById("login-screen").style.display = "none";
         document.getElementById("media-screen").style.display = "block";
         document.getElementById("footer").style.display = "block";
 
-        document.body.style.overflow = "auto";
-
+        document.body.style.overflowY = "auto";
     } else {
         alert("Nepareizs lietotājvārds vai parole!");
     }
 }
-
-/* Проверка видео */
-function checkVideo() {
-    fetch("film.mp4", { method: "HEAD" })
-        .then(res => {
-            if (res.ok) {
-                document.getElementById("video-player").style.display = "block";
-            } else {
-                document.getElementById("no-video").style.display = "block";
-            }
-        })
-        .catch(() => {
-            document.getElementById("no-video").style.display = "block";
-        });
-}
-checkVideo();
 </script>
 
 </body>
