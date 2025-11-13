@@ -2,128 +2,100 @@
 <html lang="lv">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Filma — 2025</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Filma — Login</title>
 
 <style>
-    /* ГЛОБАЛЬНО FIX ШИРИНЫ */
+    /* ЖЁСТКИЙ ФИКС PERFECTION */
     * {
         margin: 0;
         padding: 0;
-        box-sizing: border-box; /* ← самое главное */
+        box-sizing: border-box;
+        max-width: 100% !important;
     }
 
     html, body {
         width: 100%;
-        overflow-x: hidden; /* ← запрещаем горизонтальный скролл */
+        height: 100%;
+        overflow: hidden; /* НЕТ скролла = НЕТ смещения */
         background: #000;
-        font-family: 'Segoe UI', Arial, sans-serif;
-        color: white;
+        font-family: Arial, sans-serif;
     }
 
-    /* ЛОГИН ЭКРАН */
-    #login-screen {
+    /* Центрирование 100% */
+    #login {
         position: fixed;
         inset: 0;
         display: flex;
         justify-content: center;
         align-items: center;
+
         padding: 20px;
         background: #000;
-        z-index: 999;
     }
 
-    .login-box {
+    .box {
         width: 100%;
-        max-width: 350px;   /* ← НЕ 360, чтобы точно влезло */
-        background: #151515;
-        padding: 25px;
+        max-width: 320px;  /* ← 320px уместится на ЛЮБОМ мобиле */
+        
+        background: #1a1a1a;
+        padding: 20px;
         border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.05);
-        box-shadow: 0 0 20px rgba(255,0,0,0.25);
     }
 
-    h2 {
+    h1 {
         text-align: center;
-        font-size: 26px;
         margin-bottom: 20px;
         color: #e50914;
+        font-size: 26px;
     }
 
     input {
-        width: 100%; /* ← фикс ширины */
+        width: 100%;
         padding: 14px;
-        margin-top: 10px;
+        margin-top: 12px;
+        border-radius: 8px;
         border: none;
-        border-radius: 6px;
         background: #333;
-        color: white;
+        color: #fff;
         font-size: 16px;
     }
 
     button {
-        width: 100%; /* ← фикс ширины */
+        width: 100%;
         padding: 14px;
         margin-top: 20px;
         background: #e50914;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         color: white;
         font-size: 18px;
-    }
-
-    /* MOVIE PAGE */
-    .media-page {
-        display: none;
-        padding: 20px;
-    }
-
-    .footer {
-        display: none;
-        text-align: center;
-        color: #aaa;
-        font-size: 13px;
-        padding: 20px;
     }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="login-screen">
-    <div class="login-box">
-        <h2>Pieslēgšanās</h2>
-        <input id="login" placeholder="Lietotājvārds">
-        <input id="password" type="password" placeholder="Parole">
+<div id="login">
+    <div class="box">
+        <h1>Pieslēgšanās</h1>
+        <input id="user" placeholder="Lietotājvārds">
+        <input id="pass" type="password" placeholder="Parole">
         <button onclick="auth()">Ienākt</button>
     </div>
 </div>
 
-<!-- MOVIE PAGE -->
-<div id="media-screen" class="media-page">
-    <h3>The Last Time</h3>
-    <p>Filma...</p>
-</div>
-
-<div id="footer" class="footer">
-    Filma no Milānas K., Ričarda K., Katrīnas B., Unas B. un Daniela K.
-</div>
-
 <script>
-const correctLogin = "guest";
-const correctPassword = "film2025";
+const u = "guest";
+const p = "film2025";
 
 function auth() {
-    const login = document.getElementById("login").value;
-    const pass  = document.getElementById("password").value;
+    if (document.getElementById("user").value === u &&
+        document.getElementById("pass").value === p) {
 
-    if (login === correctLogin && pass === correctPassword) {
-        document.getElementById("login-screen").style.display = "none";
-        document.getElementById("media-screen").style.display = "block";
-        document.getElementById("footer").style.display = "block";
+        document.getElementById("login").innerHTML =
+        "<h1 style='color:white;text-align:center;'>Sveicināts!</h1>";
 
-        document.body.style.overflowY = "auto";
     } else {
         alert("Nepareizs lietotājvārds vai parole!");
     }
