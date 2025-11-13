@@ -14,20 +14,19 @@
         overflow-x: hidden;
     }
 
-    /* Fade animation */
     @keyframes fade {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* LOGIN SCREEN */
+    /* LOGIN */
     .center {
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        animation: fade 0.8s ease;
         padding: 20px;
+        animation: fade 0.8s ease;
     }
 
     .login-box {
@@ -36,8 +35,8 @@
         background: rgba(20,20,20,0.9);
         padding: 35px;
         border-radius: 12px;
-        box-shadow: 0 0 25px rgba(255,0,0,0.25);
         border: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 0 25px rgba(229,9,20,0.25);
     }
 
     h2 {
@@ -63,10 +62,10 @@
         width: 100%;
         padding: 14px;
         margin-top: 10px;
-        background: #e50914;
         border: none;
         border-radius: 6px;
         font-size: 18px;
+        background: #e50914;
         color: white;
         cursor: pointer;
         transition: 0.25s;
@@ -89,8 +88,8 @@
         background: linear-gradient(135deg, #141414, #0d0d0d);
         border-radius: 12px;
         padding: 25px;
-        margin-bottom: 25px;
         border: 1px solid rgba(255,255,255,0.07);
+        margin-bottom: 25px;
         box-shadow: 0 0 30px rgba(0,0,0,0.4);
     }
 
@@ -118,11 +117,21 @@
         font-size: 20px;
         margin-top: 10px;
     }
+
+    /* FOOTER */
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        opacity: 0.6;
+        font-size: 14px;
+        padding-bottom: 20px;
+        letter-spacing: 1px;
+    }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN SCREEN -->
 <div class="center" id="login-screen">
     <div class="login-box">
         <h2>Pieslēgšanās</h2>
@@ -148,8 +157,13 @@
     <video id="video-player" controls style="display:none;">
         <source src="film.mp4" type="video/mp4">
     </video>
+
+    <div class="footer">
+        Made by <b>Deveam</b>
+    </div>
 </div>
 
+<!-- JS -->
 <script>
 const correctLogin = "guest";
 const correctPassword = "film2025";
