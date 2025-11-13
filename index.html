@@ -6,6 +6,10 @@
 <title>Filma — 2025</title>
 
 <style>
+    :root {
+        --real-vh: 100vh; /* будет заменён JS */
+    }
+
     body {
         margin: 0;
         background: #000;
@@ -14,10 +18,9 @@
         overflow-x: hidden;
     }
 
-    /* Нет прокрутки на логине */
     body.lock {
         overflow: hidden;
-        height: 100svh;
+        height: var(--real-vh);
     }
 
     @keyframes fade {
@@ -25,13 +28,13 @@
         to { opacity:1; transform: translateY(0); }
     }
 
-    /* LOGIN — ИДЕАЛЬНЫЙ ЦЕНТР НА ТЕЛЕФОНАХ (100svh FIX) */
+    /* ЛОГИН С ЧЕСТНЫМ ЦЕНТРОМ */
     .center {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        height: 100svh;            /* <— фикс для Android/iOS */
+        height: var(--real-vh); /* ← вот это фиксирует ВСЁ */
         width: 100%;
 
         padding: 20px;
@@ -47,7 +50,6 @@
         background: rgba(20,20,20,0.9);
         padding: 35px;
         border-radius: 12px;
-
         border: 1px solid rgba(255,255,255,0.05);
         box-shadow: 0 0 25px rgba(229,9,20,0.25);
     }
@@ -75,14 +77,11 @@
         width: 100%;
         padding: 14px;
         margin-top: 10px;
-
         border: none;
         border-radius: 6px;
-
         font-size: 18px;
         background: #e50914;
         color: white;
-
         cursor: pointer;
         transition: 0.25s;
     }
@@ -93,7 +92,6 @@
         box-shadow: 0 0 20px rgba(229,9,20,0.5);
     }
 
-    /* MOVIE PAGE */
     .media-page {
         display: none;
         padding: 25px;
@@ -134,7 +132,6 @@
         margin-top: 10px;
     }
 
-    /* WATERMARK */
     .footer {
         text-align: center;
         opacity: 0.45;
@@ -148,7 +145,6 @@
 
 <body class="lock">
 
-<!-- LOGIN PAGE -->
 <div class="center" id="login-screen">
     <div class="login-box">
         <h2>Pieslēgšanās</h2>
@@ -160,7 +156,6 @@
     </div>
 </div>
 
-<!-- MOVIE PAGE -->
 <div class="media-page" id="media-screen">
 
     <div class="info-box">
@@ -178,13 +173,22 @@
     </video>
 </div>
 
-<!-- WATERMARK -->
 <div class="footer" id="footer">
     Filma no Milānas K., Ričarda K., Katrīnas B., Unas B. un Daniela K.
 </div>
 
-<!-- JS -->
 <script>
+/* <<< ВОТ ЭТО ЧИНИТ ANDROID CHROME 100% >>> */
+function fixHeight() {
+    document.documentElement.style.setProperty(
+        "--real-vh",
+        window.innerHeight + "px"
+    );
+}
+fixHeight();
+window.addEventListener("resize", fixHeight);
+
+/* LOGIN */
 const correctLogin = "guest";
 const correctPassword = "film2025";
 
@@ -193,13 +197,11 @@ function auth() {
     const pass = document.getElementById("password").value.trim();
 
     if (login === correctLogin && pass === correctPassword) {
-
         document.getElementById("login-screen").style.display = "none";
         document.getElementById("media-screen").style.display = "block";
         document.getElementById("footer").style.display = "block";
 
         document.body.classList.remove("lock");
-
     } else {
         alert("Nepareizs lietotājvārds vai parole!");
     }
