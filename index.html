@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Pieeja</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #292929);
+            color: #fff;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 360px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        button {
+            width: 95%;
+            padding: 12px;
+            background: #4ca7ff;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #62b4ff;
+        }
+
+        .media-page {
+            display: none;
+            padding: 25px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.07);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        .info-box h3 {
+            margin: 0 0 10px;
+            font-size: 24px;
+        }
+
+        .info-box p {
+            opacity: 0.85;
+            margin: 5px 0;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 14px;
+            margin-top: 15px;
+        }
+
+        #no-video {
+            font-size: 19px;
+            opacity: 0.85;
+            text-align: center;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN -->
+    <div class="center" id="login-screen">
+        <div class="login-box">
+            <h2>Pieslēgšanās</h2>
+            <input type="text" id="login" placeholder="Lietotājvārds">
+            <input type="password" id="password" placeholder="Parole">
+            <button onclick="auth()">Ienākt</button>
+        </div>
+    </div>
+
+    <!-- FILM PAGE -->
+    <div class="media-page" id="media-screen">
+
+        <div class="info-box">
+            <h3 id="film-title">The Last Time</h3>
+            <p id="film-desc">Par filmu: drāma, kas drīzumā būs pieejama skatīšanai.</p>
+            <p><b>Gads:</b> 2025</p>
+            <p><b>Žanrs:</b> Drāma</p>
+            <p><b>Ilgums:</b> 25 min</p>
+        </div>
+
+        <div id="video-wrapper">
+            <p id="no-video" style="display:none;">Filma vēl nav pievienota…</p>
+
+            <video id="video-player" controls style="display:none;">
+                <source src="film.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <script>
+        const correctLogin = "guest";
+        const correctPassword = "film2025";
+
+        function auth() {
+            const login = document.getElementById("login").value;
+            const pass = document.getElementById("password").value;
+
+            if (login === correctLogin && pass === correctPassword) {
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("media-screen").style.display = "block";
+            } else {
+                alert("Nepareizs lietotājvārds vai parole!");
+            }
+        }
+
+        function checkVideo() {
+            fetch("film.mp4", { method: "HEAD" })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById("video-player").style.display = "block";
+                } else {
+                    document.getElementById("no-video").style.display = "block";
+                }
+            })
+            .catch(() => {
+                document.getElementById("no-video").style.display = "block";
+            });
+        }
+
+        checkVideo();
+    </script>
+
+</body>
+</html>
