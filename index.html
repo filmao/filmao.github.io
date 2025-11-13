@@ -12,6 +12,9 @@
         font-family: 'Segoe UI', Arial, sans-serif;
         color: white;
         overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
 
     @keyframes fade {
@@ -21,10 +24,10 @@
 
     /* LOGIN */
     .center {
-        height: 100vh;
+        flex: 1;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         padding: 20px;
         animation: fade 0.8s ease;
     }
@@ -82,6 +85,7 @@
         display: none;
         padding: 25px;
         animation: fade 0.8s ease;
+        flex: 1;
     }
 
     .info-box {
@@ -118,14 +122,14 @@
         margin-top: 10px;
     }
 
-    /* FOOTER */
+    /* FOOTER WATERMARK */
     .footer {
         text-align: center;
-        margin-top: 40px;
-        opacity: 0.6;
-        font-size: 14px;
-        padding-bottom: 20px;
-        letter-spacing: 1px;
+        opacity: 0.45;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        padding: 15px 10px;
+        margin-top: auto;
     }
 </style>
 </head>
@@ -157,10 +161,11 @@
     <video id="video-player" controls style="display:none;">
         <source src="film.mp4" type="video/mp4">
     </video>
+</div>
 
-    <div class="footer">
-        Made by <b>Deveam</b>
-    </div>
+<!-- WATERMARK -->
+<div class="footer">
+    Filma izveidota no Milanas, Ričarda, Katrīnas, Unas un Daniela K
 </div>
 
 <!-- JS -->
