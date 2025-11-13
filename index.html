@@ -2,128 +2,127 @@
 <html lang="lv">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Media Pieeja — Apple TV Style</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Filma — Netflix Style</title>
 
 <style>
     body {
-        margin:0;
-        padding:0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: radial-gradient(circle at top, #1a1a1a, #0d0d0d 70%);
-        color:white;
-        overflow-x:hidden;
+        margin: 0;
+        background: #000;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        color: white;
+        overflow-x: hidden;
     }
 
+    /* Fade animation */
+    @keyframes fade {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LOGIN SCREEN */
     .center {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        padding:20px;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fade 0.8s ease;
+        padding: 20px;
     }
 
     .login-box {
-        width:100%;
-        max-width:380px;
-        padding:35px;
-        border-radius:30px;
-        background:rgba(255,255,255,0.08);
-        backdrop-filter:blur(30px);
-        box-shadow:0 0 40px rgba(0,0,0,0.6);
-        text-align:center;
-        animation:fadeIn 0.8s ease;
+        width: 100%;
+        max-width: 360px;
+        background: rgba(20,20,20,0.9);
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(255,0,0,0.25);
+        border: 1px solid rgba(255,255,255,0.05);
     }
 
     h2 {
-        font-size:32px;
-        margin-bottom:25px;
-        font-weight:600;
-        letter-spacing:1px;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #e50914;
     }
 
     input {
-        width:90%;
-        padding:14px;
-        margin:12px 0;
-        border-radius:14px;
-        border:none;
-        background:rgba(255,255,255,0.15);
-        color:white;
-        font-size:16px;
-        transition:0.2s;
-    }
-    input:focus {
-        background:rgba(255,255,255,0.22);
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        margin: 10px 0;
+        background: #333;
+        color: white;
+        font-size: 16px;
     }
 
     button {
-        width:95%;
-        padding:14px;
-        margin-top:10px;
-        border:none;
-        border-radius:14px;
-        font-size:18px;
-        background:linear-gradient(135deg, #3a86ff, #7ab6ff);
-        color:white;
-        cursor:pointer;
-        transition:0.25s;
-        box-shadow:0 0 18px rgba(60,120,255,0.4);
-    }
-    button:hover {
-        transform:scale(1.03);
-        box-shadow:0 0 25px rgba(60,120,255,0.65);
+        width: 100%;
+        padding: 14px;
+        margin-top: 10px;
+        background: #e50914;
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        color: white;
+        cursor: pointer;
+        transition: 0.25s;
     }
 
+    button:hover {
+        background: #f6121d;
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(229,9,20,0.5);
+    }
+
+    /* MOVIE PAGE */
     .media-page {
-        display:none;
-        max-width:900px;
-        margin:auto;
-        padding:30px;
-        animation:fadeIn 0.7s ease;
+        display: none;
+        padding: 25px;
+        animation: fade 0.8s ease;
     }
 
     .info-box {
-        background:rgba(255,255,255,0.06);
-        border-radius:25px;
-        padding:25px;
-        margin-bottom:30px;
-        backdrop-filter:blur(20px);
-        box-shadow:0 0 25px rgba(0,0,0,0.45);
+        background: linear-gradient(135deg, #141414, #0d0d0d);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid rgba(255,255,255,0.07);
+        box-shadow: 0 0 30px rgba(0,0,0,0.4);
     }
 
     .info-box h3 {
-        font-size:28px;
-        margin-bottom:10px;
+        font-size: 26px;
+        margin-bottom: 10px;
     }
 
     .info-box p {
-        opacity:0.9;
-        margin:6px 0;
-        font-size:17px;
+        font-size: 17px;
+        opacity: 0.9;
+        margin: 4px 0;
     }
 
     video {
-        width:100%;
-        border-radius:20px;
-        box-shadow:0 0 30px rgba(0,0,0,0.7);
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.8);
+        animation: fade 0.8s ease;
     }
 
     #no-video {
-        text-align:center;
-        font-size:20px;
-        opacity:0.8;
-        padding:10px;
-    }
-
-    @keyframes fadeIn {
-        from { opacity:0; transform:translateY(20px); }
-        to { opacity:1; transform:translateY(0); }
+        text-align: center;
+        opacity: 0.8;
+        font-size: 20px;
+        margin-top: 10px;
     }
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div class="center" id="login-screen">
     <div class="login-box">
         <h2>Pieslēgšanās</h2>
@@ -133,7 +132,9 @@
     </div>
 </div>
 
+<!-- MOVIE PAGE -->
 <div class="media-page" id="media-screen">
+
     <div class="info-box">
         <h3>The Last Time</h3>
         <p><b>Par filmu:</b> drāma par stāstu, kas maina dzīvi.</p>
@@ -142,12 +143,11 @@
         <p><b>Ilgums:</b> 25 min</p>
     </div>
 
-    <div>
-        <p id="no-video" style="display:none;">Filma vēl nav pievienota…</p>
-        <video id="video-player" controls style="display:none;">
-            <source src="film.mp4" type="video/mp4">
-        </video>
-    </div>
+    <p id="no-video" style="display:none;">Filma vēl nav pievienota…</p>
+
+    <video id="video-player" controls style="display:none;">
+        <source src="film.mp4" type="video/mp4">
+    </video>
 </div>
 
 <script>
@@ -167,44 +167,21 @@ function auth() {
 }
 
 function checkVideo() {
-    fetch("film.mp4", { method:"HEAD" })
-    .then(res => {
-        if(res.ok) {
-            document.getElementById("video-player").style.display = "block";
-        } else {
+    fetch("film.mp4", { method: "HEAD" })
+        .then(res => {
+            if (res.ok) {
+                document.getElementById("video-player").style.display = "block";
+            } else {
+                document.getElementById("no-video").style.display = "block";
+            }
+        })
+        .catch(() => {
             document.getElementById("no-video").style.display = "block";
-        }
-    })
-    .catch(() => {
-        document.getElementById("no-video").style.display = "block";
-    });
+        });
 }
 
 checkVideo();
 </script>
-
-</body>
-</html>            } else {
-                alert("Nepareizs lietotājvārds vai parole!");
-            }
-        }
-
-        function checkVideo() {
-            fetch("film.mp4", { method: "HEAD" })
-            .then(res => {
-                if (res.ok) {
-                    document.getElementById("video-player").style.display = "block";
-                } else {
-                    document.getElementById("no-video").style.display = "block";
-                }
-            })
-            .catch(() => {
-                document.getElementById("no-video").style.display = "block";
-            });
-        }
-
-        checkVideo();
-    </script>
 
 </body>
 </html>
