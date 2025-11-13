@@ -14,10 +14,10 @@
         overflow-x: hidden;
     }
 
-    /* отключаем прокрутку когда класс .lock */
+    /* Нет прокрутки на логине */
     body.lock {
         overflow: hidden;
-        height: 100vh;
+        height: 100svh;
     }
 
     @keyframes fade {
@@ -25,13 +25,13 @@
         to { opacity:1; transform: translateY(0); }
     }
 
-    /* LOGIN — идеально центрированное flex */
+    /* LOGIN — ИДЕАЛЬНЫЙ ЦЕНТР НА ТЕЛЕФОНАХ (100svh FIX) */
     .center {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        height: 100vh;
+        height: 100svh;            /* <— фикс для Android/iOS */
         width: 100%;
 
         padding: 20px;
@@ -134,14 +134,13 @@
         margin-top: 10px;
     }
 
-    /* FOOTER — watermark */
+    /* WATERMARK */
     .footer {
         text-align: center;
         opacity: 0.45;
         font-size: 13px;
         padding: 15px 10px;
         letter-spacing: .5px;
-
         display: none;
     }
 </style>
@@ -195,16 +194,10 @@ function auth() {
 
     if (login === correctLogin && pass === correctPassword) {
 
-        // скрыть логин
         document.getElementById("login-screen").style.display = "none";
-
-        // показать фильм
         document.getElementById("media-screen").style.display = "block";
-
-        // включить watermark
         document.getElementById("footer").style.display = "block";
 
-        // включить прокрутку
         document.body.classList.remove("lock");
 
     } else {
